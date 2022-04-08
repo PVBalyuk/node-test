@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "dev": "tsc && nodemon index.js"
+    "dev": "tsc && nodemon index.js",
+    "lint": "eslint .",  
+    "lint:fix": "eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -24,7 +26,13 @@
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/node": "^17.0.23",
+    "@typescript-eslint/eslint-plugin": "^5.18.0",
+    "@typescript-eslint/parser": "^5.18.0",
+    "eslint": "^8.12.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "nodemon": "^2.0.15",
+    "prettier": "^2.6.2",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
   }
