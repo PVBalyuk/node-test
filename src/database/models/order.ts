@@ -1,8 +1,9 @@
 import sequelize from '../database';
 import { Sequelize, DataTypes } from 'sequelize';
+import {dbModelNames} from "./dbModelNames";
 
 const Order = sequelize.define(
-  'Order',
+  dbModelNames.order,
   {
     id: {
       type: DataTypes.INTEGER,

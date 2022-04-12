@@ -1,10 +1,14 @@
 import { Sequelize, DataTypes } from 'sequelize';
-// import Customer from './models/customer';
-// import Order from './models/order';
+import dotenv from "dotenv"
+import * as path from "path";
 
-const sequelize = new Sequelize('node_test', 'root', '12345678', {
-  dialect: 'mysql',
-  host: 'localhost',
+const envpath = path.basename("../../.env.local");
+
+dotenv.config({path: envpath });
+
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_LOGIN, process.env.DB_PASSWORD, {
+  dialect: "mysql",
+  host: "localhost",
 });
 
 export default sequelize;

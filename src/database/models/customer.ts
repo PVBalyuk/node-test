@@ -1,8 +1,9 @@
 import { DataTypes, Sequelize } from 'sequelize';
 import sequelize from '../database';
+import {dbModelNames} from "./dbModelNames";
 
 const Customer = sequelize.define(
-  'Customer',
+  dbModelNames.customer,
   {
     id: {
       type: DataTypes.INTEGER,
