@@ -23,9 +23,15 @@
   },
   "homepage": "https://github.com/PVBalyuk/node-test#readme",
   "dependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/jsonwebtoken": "^8.5.8",
     "@types/sequelize": "^4.28.11",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "express-validator": "^6.14.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
     "mysql2": "^2.3.3",
     "sequelize": "^6.18.0"
   },
