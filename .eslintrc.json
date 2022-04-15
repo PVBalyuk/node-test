@@ -3,6 +3,9 @@
   "extends": ["plugin:@typescript-eslint/recommended"],
   "parserOptions": { "ecmaVersion": 2018, "sourceType": "module" },
   "rules": {
+    "eol-last": ["error", "always"],
+    "newline-after-var": "error"  ,
+    "newline-before-return": "error",
     "@typescript-eslint/no-var-requires": 0
   }
 }

@@ -1,6 +1,6 @@
 import sequelize from '../../database';
 import { Sequelize, DataTypes, Model } from 'sequelize';
-import { dbModelNames } from '../dbModelNames';
+import { DbModelNames } from '../dbModelNames';
 import { IOrder, IOrderCreation } from './orderModel';
 
 export class Order extends Model<IOrder, IOrderCreation> {}
@@ -19,6 +19,6 @@ export const initOrder = (sequelize: Sequelize) => {
         allowNull: false,
       },
     },
-    { sequelize, modelName: dbModelNames.Order },
+    { sequelize, modelName: DbModelNames.Order },
   );
 };

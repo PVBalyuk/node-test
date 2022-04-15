@@ -1,4 +1,4 @@
-export enum dbModelNames {
+export enum DbModelNames {
   Customer = 'Customer',
   Order = 'Order',
 }

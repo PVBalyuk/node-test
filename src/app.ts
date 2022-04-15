@@ -1,8 +1,9 @@
 import express from 'express';
 import { initializeDatabase } from './database/initializeDatabase';
-import router from './authRouter';
+import router from './auth/authRouter';
 
 const app = express();
+
 app.use(express.json());
 app.use('/auth', router);
 
@@ -14,6 +15,6 @@ export const bootstrap = async () => {
       console.log('server running at port');
     });
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };

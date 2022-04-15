@@ -1,6 +1,6 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import { ICustomer, ICustomerCreation } from './customerModel';
-import { dbModelNames } from '../dbModelNames';
+import { DbModelNames } from '../dbModelNames';
 
 export class Customer extends Model<ICustomer, ICustomerCreation> {}
 
@@ -34,6 +34,6 @@ export const initCustomer = (sequelize: Sequelize) => {
         allowNull: true,
       },
     },
-    { sequelize, modelName: dbModelNames.Customer },
+    { sequelize, modelName: DbModelNames.Customer },
   );
 };

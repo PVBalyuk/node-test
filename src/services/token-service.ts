@@ -1,12 +1,5 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import path from 'path';
-import dotenv from 'dotenv';
-import { Interface } from 'readline';
-const envpath = path.basename('../../.env.local');
-
-/* ФАЙЛ СОЗДАН, НО ПОКА НЕ ПЕРЕНОСИЛ СЮДА ЛОГИКУ ИЗ AuthController   */
-
-dotenv.config({ path: envpath });
+import { SECRET_KEY_CONFIG } from '../config/auth-config';
 
 interface ITokens {
   accessToken: string;
@@ -21,8 +14,8 @@ interface ITokenPayload {
 
 class TokenService {
   async generateTokens(payload: ITokenPayload): Promise<ITokens> {
-    const accessToken = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '15m' });
-    const refreshToken = jwt.sign(payload, process.env.SECRET_KEY_REFRESH, { expiresIn: '30d' });
+    const accessToken = jwt.sign(payload, SECRET_KEY_CONFIG.secretKeyAccess, { expiresIn: '15m' });
+    const refreshToken = jwt.sign(payload, SECRET_KEY_CONFIG.secretKeyRefresh, { expiresIn: '30d' });
     return {
       accessToken,
       refreshToken,
