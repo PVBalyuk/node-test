@@ -1,6 +1,6 @@
 import express from 'express';
 import { initializeDatabase } from './database/initializeDatabase';
-import router from './auth/authRouter';
+import router from './modules/auth/router';
 
 const app = express();
 

@@ -1,4 +1,3 @@
-import sequelize from '../../database';
 import { Sequelize, DataTypes, Model } from 'sequelize';
 import { DbModelNames } from '../dbModelNames';
 import { IOrder, IOrderCreation } from './orderModel';
