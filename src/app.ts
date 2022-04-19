@@ -18,7 +18,7 @@ export const bootstrap = async () => {
     await initializeDatabase();
 
     app.listen(process.env.PORT, () => {
-      console.log('server running at port');
+      console.log(`server running at port ${process.env.PORT}`);
     });
   } catch (e) {
     console.error(e);
