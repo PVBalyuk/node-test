@@ -8,6 +8,7 @@ declare global {
       DB_HOST: string;
       SECRET_KEY: string;
       SECRET_KEY_REFRESH: string;
+      PORT: number;
     }
   }
 }
