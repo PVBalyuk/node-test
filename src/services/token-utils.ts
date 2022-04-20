@@ -28,7 +28,10 @@ export const validateAccessToken = async (token: string): Promise<ITokenPayload 
 };
 
 export const validateRefreshToken = async (token: string | null | undefined): Promise<ITokenPayload> => {
-  const verified = await jwt.verify(token as string, process.env.SECRET_KEY_REFRESH);
+  if (!token) {
+    throw new Error('Ошибка токена');
+  }
+  const verified = await jwt.verify(token, process.env.SECRET_KEY_REFRESH);
 
   if (typeof verified === 'string') {
     throw new Error();
@@ -37,7 +40,11 @@ export const validateRefreshToken = async (token: string | null | undefined): Pr
   return verified as ITokenPayload;
 };
 
-export const expiredToken = async (token: string): Promise<Error | void> => {
+export const validateExpiredToken = async (token: string | null | undefined): Promise<Error | void> => {
+  if (!token) {
+    throw new Error('Ошибка токена');
+  }
+
   const decoded: IDecodedToken = jwt_decode(token);
 
   const expiresAt = decoded.exp;
