@@ -3,7 +3,7 @@ import { registrationValidation } from './registration-validation';
 import { registration } from './handlers/registation';
 import { login } from './handlers/login';
 import { refreshToken } from './handlers/refresh-token';
-import { validateAuth } from '../../middleware/validateAuth';
+import { validateAuth } from './authMiddleware/validateAuth';
 
 const router = express.Router();
 

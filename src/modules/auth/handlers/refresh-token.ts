@@ -6,9 +6,9 @@ import { ICustomer } from '../../../database/models/Customer/customerModel';
 export const refreshToken = async (req: Request<Record<string, unknown>, unknown, ICustomer>, res: Response) => {
   const { refreshToken } = req.body;
 
-  const userData = await validateRefreshToken(refreshToken);
+  const userTokenPayload = await validateRefreshToken(refreshToken);
 
-  const user = await Customer.findOne({ where: { email: userData.email } });
+  const user = await Customer.findOne({ where: { email: userTokenPayload.email } });
 
   if (!user) {
     return res.status(400).json('Нет пользователя');
@@ -20,11 +20,11 @@ export const refreshToken = async (req: Request<Record<string, unknown>, unknown
   }
   await validateExpiredToken(refreshTokenFromDB);
 
-  const email = user.get().email;
+  const { email } = user.get();
 
   const newTokens = await generateTokens({ email });
 
-  await Customer.update({ refreshToken: newTokens.refreshToken }, { where: { email: userData.email } });
+  await Customer.update({ refreshToken: newTokens.refreshToken }, { where: { email: userTokenPayload.email } });
 
   return res.status(200).json(newTokens);
 };
