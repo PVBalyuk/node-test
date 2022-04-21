@@ -19,5 +19,5 @@ export const login = async (req: Request<Record<string, unknown>, unknown, ICust
   const token = await generateTokens({ email });
 
   await Customer.update({ refreshToken: token.refreshToken }, { where: { email: req.body.email } });
-  res.status(200).json(`id${id} ${firstName} ${secondName} ${email} Refresh token - ${token.refreshToken}`);
+  return res.status(200).json(`id${id} ${firstName} ${secondName} ${email} Refresh token - ${token.refreshToken}`);
 };
