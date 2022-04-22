@@ -21,5 +21,6 @@ export const login = async (req: Request<Record<string, unknown>, unknown, ICust
   const tokens = await generateTokens({ email });
 
   await Customer.update({ refreshToken: tokens.refreshToken }, { where: { email: requestEmail } });
-  res.status(200).json({ id, firstName, secondName, email, refreshToken: tokens.refreshToken });
+
+  return res.status(200).json({ id, firstName, secondName, email, refreshToken: tokens.refreshToken });
 };

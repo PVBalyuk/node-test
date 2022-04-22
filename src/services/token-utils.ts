@@ -3,7 +3,7 @@ import { SECRET_KEY_CONFIG } from '../config/auth-config';
 import { ITokens, ITokenPayload, IDecodedToken } from '../modules/auth/types';
 import jwt_decode from 'jwt-decode';
 
-export const generateTokens = async (payload: ITokenPayload): Promise<ITokens> => {
+export const generateTokens = (payload: ITokenPayload): ITokens => {
   const accessToken = jwt.sign(payload, SECRET_KEY_CONFIG.secretKeyAccess, {
     expiresIn: SECRET_KEY_CONFIG.expiresInAccess,
   });
@@ -17,37 +17,38 @@ export const generateTokens = async (payload: ITokenPayload): Promise<ITokens> =
   };
 };
 
-export const validateAccessToken = async (token: string): Promise<ITokenPayload | null> => {
-  try {
-    const dataFromToken = jwt.verify(token, process.env.SECRET_KEY);
-
-    return dataFromToken as ITokenPayload;
-  } catch (e) {
-    return null;
-  }
-};
-
-export const validateRefreshToken = async (token: string | null | undefined): Promise<ITokenPayload> => {
+export const validateAccessToken = (token: string | null | undefined): ITokenPayload => {
   if (!token) {
     throw new Error('Ошибка токена');
   }
-  const verified = await jwt.verify(token, process.env.SECRET_KEY_REFRESH);
+  const verified = jwt.verify(token, SECRET_KEY_CONFIG.secretKeyAccess);
 
   if (typeof verified === 'string') {
-    throw new Error();
+    throw new Error('Invalid token');
   }
 
   return verified as ITokenPayload;
 };
 
-export const validateExpiredToken = async (token: string | null | undefined): Promise<Error | void> => {
+export const validateRefreshToken = (token: string | null | undefined): ITokenPayload => {
+  if (!token) {
+    throw new Error('Ошибка токена');
+  }
+  const verified = jwt.verify(token, SECRET_KEY_CONFIG.secretKeyRefresh);
+
+  if (typeof verified === 'string') {
+    throw new Error('Invalid token');
+  }
+
+  return verified as ITokenPayload;
+};
+
+export const validateExpiredToken = (token: string | null | undefined): Error | void => {
   if (!token) {
     throw new Error('Ошибка токена');
   }
 
-  const decoded: IDecodedToken = jwt_decode(token);
-
-  const expiresAt = decoded.exp;
+  const { exp: expiresAt }: IDecodedToken = jwt_decode(token);
 
   if (!expiresAt) {
     throw new Error('Рефреш токен истёк');
