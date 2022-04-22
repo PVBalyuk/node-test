@@ -1,9 +1,7 @@
 import jwt, { sign, verify } from 'jsonwebtoken';
 import { SECRET_KEY_CONFIG } from '../../config/auth-config';
-import { ITokens, ITokenPayload, IDecodedToken } from '../../modules/auth/types';
 import jwt_decode from 'jwt-decode';
 import { generateTokens, validateAccessToken, validateRefreshToken, validateExpiredToken } from '../token-utils';
-import exp from 'constants';
 
 jest.mock('jsonwebtoken', () => ({
   sign: jest.fn(),
